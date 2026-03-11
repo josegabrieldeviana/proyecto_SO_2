@@ -90,6 +90,26 @@ public class FileSystemManager {
         }
     }
 
+    public synchronized boolean renameItem(FileSystemItem item, String newName) {
+        if (!isAdmin) return false;
+        if (newName == null || newName.trim().isEmpty()) return false;
+
+        String oldName = item.getName();
+        JournalEntry entry = journal.logStart("RENAME", oldName + " -> " + newName.trim());
+        if (!LockManager.acquireLock(oldName, true)) {
+            entry.abort();
+            return false;
+        }
+        try {
+            item.setName(newName.trim());
+            entry.commit();
+            return true;
+        } finally {
+            LockManager.releaseLock(oldName);
+        }
+    }
+    
+    
     public void switchMode(boolean admin) { this.isAdmin = admin; }
     public boolean isAdmin() { return isAdmin; }
     public VDirectory getRoot() { return root; }
