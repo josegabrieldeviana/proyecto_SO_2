@@ -110,6 +110,22 @@ public class FileSystemManager {
     }
     
     
+    public synchronized boolean createDirectory(String name, VDirectory parent) {
+        if (!isAdmin) return false;
+        if (name == null || name.trim().isEmpty()) return false;
+
+        JournalEntry entry = journal.logStart("MKDIR", parent.getName() + "/" + name.trim());
+        try {
+            VDirectory newDir = new VDirectory(name.trim(), currentUser, 755);
+            parent.addChild(newDir);
+            entry.commit();
+            return true;
+        } catch (Exception e) {
+            entry.abort();
+            return false;
+        }
+    }
+
     public void switchMode(boolean admin) { this.isAdmin = admin; }
     public boolean isAdmin() { return isAdmin; }
     public VDirectory getRoot() { return root; }

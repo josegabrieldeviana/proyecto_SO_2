@@ -16,7 +16,7 @@ public class MainFrame extends JFrame {
     private DiskVisualizer diskVisualizer;
     private JTextArea logArea;
     private AllocationTableModel tableModel;
-    private JButton btnCreate, btnDelete, btnRename, btnVerify;
+    private JButton btnCreate, btnDelete, btnRename, btnVerify, btnCreateDir;
     private JCheckBox chkAdmin;
     private VDirectory currentDirectory;
 
@@ -157,7 +157,21 @@ public class MainFrame extends JFrame {
             refreshUI();
         });
 
+        btnCreateDir = new JButton("Crear Directorio");
+        btnCreateDir.addActionListener(e -> {
+            String name = JOptionPane.showInputDialog(this, "Nombre del nuevo directorio:");
+            if (name != null && !name.trim().isEmpty()) {
+                if (fsm.createDirectory(name, currentDirectory)) {
+                    logArea.append("[FS] Directorio '" + name.trim() + "' creado en " + currentDirectory.getName() + "\n");
+                    refreshUI();
+                } else {
+                    logArea.append("[ERR] No se pudo crear el directorio o permiso denegado.\n");
+                }
+            }
+        });
+
         actionPanel.add(btnCreate);
+        actionPanel.add(btnCreateDir);
         actionPanel.add(btnRename);
         actionPanel.add(btnDelete);
         actionPanel.add(btnVerify);
@@ -181,6 +195,7 @@ public class MainFrame extends JFrame {
     private void switchMode(boolean admin) {
         fsm.switchMode(admin);
         btnCreate.setEnabled(admin);
+        btnCreateDir.setEnabled(admin);
         btnDelete.setEnabled(admin);
         btnRename.setEnabled(admin);
         logArea.append("[SISTEMA] Cambio a modo: " + (admin ? "ADMINISTRADOR" : "USUARIO") + "\n");
