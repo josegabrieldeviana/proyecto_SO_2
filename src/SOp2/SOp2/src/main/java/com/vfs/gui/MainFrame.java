@@ -16,7 +16,7 @@ public class MainFrame extends JFrame {
     private DiskVisualizer diskVisualizer;
     private JTextArea logArea;
     private AllocationTableModel tableModel;
-    private JButton btnCreate, btnDelete, btnVerify;
+    private JButton btnCreate, btnDelete, btnRename, btnVerify;
     private JCheckBox chkAdmin;
     private VDirectory currentDirectory;
 
@@ -99,6 +99,28 @@ public class MainFrame extends JFrame {
             }
         });
 
+        btnRename = new JButton("Renombrar Seleccionado");
+        btnRename.addActionListener(e -> {
+            DefaultMutableTreeNode node = (DefaultMutableTreeNode) fileTree.getLastSelectedPathComponent();
+            if (node != null && node.getUserObject() instanceof FileSystemItem) {
+                FileSystemItem item = (FileSystemItem) node.getUserObject();
+                if (item == fsm.getRoot()) {
+                    JOptionPane.showMessageDialog(this, "No se puede renombrar la raíz.");
+                    return;
+                }
+                
+                String newName = JOptionPane.showInputDialog(this, "Nuevo nombre para " + item.getName() + ":", item.getName());
+                if (newName != null && !newName.trim().isEmpty()) {
+                    if (fsm.renameResource(item, newName)) {
+                        logArea.append("[REN] Renombrado a: " + newName + "\n");
+                        refreshUI();
+                    } else {
+                        logArea.append("[ERR] No se pudo renombrar o permiso denegado.\n");
+                    }
+                }
+            }
+        });
+
         btnDelete = new JButton("Eliminar Seleccionado");
         btnDelete.addActionListener(e -> {
             DefaultMutableTreeNode node = (DefaultMutableTreeNode) fileTree.getLastSelectedPathComponent();
@@ -136,6 +158,7 @@ public class MainFrame extends JFrame {
         });
 
         actionPanel.add(btnCreate);
+        actionPanel.add(btnRename);
         actionPanel.add(btnDelete);
         actionPanel.add(btnVerify);
         actionPanel.add(btnCrash);
@@ -159,6 +182,7 @@ public class MainFrame extends JFrame {
         fsm.switchMode(admin);
         btnCreate.setEnabled(admin);
         btnDelete.setEnabled(admin);
+        btnRename.setEnabled(admin);
         logArea.append("[SISTEMA] Cambio a modo: " + (admin ? "ADMINISTRADOR" : "USUARIO") + "\n");
     }
 

@@ -69,6 +69,27 @@ public class FileSystemManager {
         parent.removeChild(file);
     }
 
+    public synchronized boolean renameResource(FileSystemItem item, String newName) {
+        if (!isAdmin) return false;
+        
+        JournalEntry entry = journal.logStart("RENAME", item.getName() + " -> " + newName);
+        if (!LockManager.acquireLock(item.getName(), true)) {
+            entry.abort();
+            return false;
+        }
+
+        try {
+            item.setName(newName);
+            entry.commit();
+            return true;
+        } catch (Exception e) {
+            entry.abort();
+            return false;
+        } finally {
+            LockManager.releaseLock(item.getName());
+        }
+    }
+
     public void switchMode(boolean admin) { this.isAdmin = admin; }
     public boolean isAdmin() { return isAdmin; }
     public VDirectory getRoot() { return root; }

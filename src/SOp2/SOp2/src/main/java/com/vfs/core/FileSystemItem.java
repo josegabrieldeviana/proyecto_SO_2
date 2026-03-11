@@ -19,6 +19,7 @@ public abstract class FileSystemItem {
 
     // Getters y Setters
     public String getName() { return name; }
+    public void setName(String name) { this.name = name; }
     public String getOwner() { return owner; }
     public int getPermissions() { return permissions; }
     public boolean isDirectory() { return isDirectory; }
