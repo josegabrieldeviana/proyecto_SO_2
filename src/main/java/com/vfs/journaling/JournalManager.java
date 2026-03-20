@@ -20,7 +20,7 @@ public class JournalManager {
 
     private void recover() {
         for (JournalEntry entry : logs) {
-            if (entry.getStatus() == TransactionStatus.PENDING) {
+            if (entry.getStatus() == TransactionStatus.PENDIENTE) {
                 System.out.println("UNDO: Revirtiendo operación incompleta -> " + entry.getOperation() + " en " + entry.getTargetPath());
                 entry.abort();
                 // Aquí se llamaría a la lógica específica para liberar bloques o eliminar nodos huérfanos

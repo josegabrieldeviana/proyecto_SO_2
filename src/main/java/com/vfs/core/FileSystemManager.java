@@ -14,7 +14,7 @@ public class FileSystemManager {
     private boolean isAdmin = true;
 
     private FileSystemManager() {
-        this.disk = new SimulatedDisk(100, 1024);
+        this.disk = new SimulatedDisk(200, 1024);
         this.root = new VDirectory("/", "Admin", 777);
         this.journal = new JournalManager();
     }
@@ -27,8 +27,16 @@ public class FileSystemManager {
     public synchronized boolean createFile(String name, int numBlocks, VDirectory parent) {
         if (!isAdmin) return false;
         
+        if (disk.getFreeBlockCount() < numBlocks) {
+            System.err.println("WARNING: Not enough free blocks available. Requested: " + numBlocks + ", Free: " + disk.getFreeBlockCount());
+            return false;
+        }
+        
         JournalEntry entry = journal.logStart("CREATE", parent.getName() + name);
-        if (!LockManager.acquireLock(name, true)) return false;
+        if (!LockManager.acquireLock(name, true)) {
+            entry.abort();
+            return false;
+        }
 
         try {
             VFile newFile = new VFile(name, currentUser, 755, numBlocks);
@@ -51,14 +59,29 @@ public class FileSystemManager {
 
     public synchronized void deleteResource(FileSystemItem item, VDirectory parent) {
         if (!isAdmin) return;
-        if (item.isDirectory()) {
-            VDirectory dir = (VDirectory) item;
-            CustomLinkedList<FileSystemItem> children = new CustomLinkedList<>();
-            for (FileSystemItem child : dir.getChildren()) children.add(child);
-            for (FileSystemItem child : children) deleteResource(child, dir);
-            parent.removeChild(dir);
-        } else {
-            deleteFile((VFile) item, parent);
+        
+        JournalEntry entry = journal.logStart("DELETE", parent.getName() + item.getName());
+        if (!LockManager.acquireLock(item.getName(), true)) {
+            entry.abort();
+            return;
+        }
+
+        try {
+            if (item.isDirectory()) {
+                VDirectory dir = (VDirectory) item;
+                CustomLinkedList<FileSystemItem> children = new CustomLinkedList<>();
+                for (FileSystemItem child : dir.getChildren()) children.add(child);
+                for (FileSystemItem child : children) deleteResource(child, dir);
+                parent.removeChild(dir);
+            } else {
+                deleteFile((VFile) item, parent);
+            }
+            entry.commit();
+        } catch (Exception e) {
+            entry.abort();
+            throw e;
+        } finally {
+            LockManager.releaseLock(item.getName());
         }
     }
 

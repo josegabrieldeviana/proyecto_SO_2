@@ -13,12 +13,12 @@ public class JournalEntry {
         this.transactionId = id;
         this.operation = op;
         this.targetPath = path;
-        this.status = TransactionStatus.PENDING;
+        this.status = TransactionStatus.PENDIENTE;
         this.timestamp = new Date();
     }
 
-    public void commit() { this.status = TransactionStatus.COMMITTED; }
-    public void abort() { this.status = TransactionStatus.ABORTED; }
+    public void commit() { this.status = TransactionStatus.CONFIRMADO; }
+    public void abort() { this.status = TransactionStatus.UNDO; }
     public TransactionStatus getStatus() { return status; }
     public String getOperation() { return operation; }
     public String getTargetPath() { return targetPath; }

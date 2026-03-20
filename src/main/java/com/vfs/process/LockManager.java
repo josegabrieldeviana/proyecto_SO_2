@@ -28,12 +28,20 @@ public class LockManager {
         if (toRemove != null) locks.remove(toRemove);
     }
 
-    private static class FileLock {
-        String fileName;
-        boolean isExclusive;
+    public static synchronized CustomLinkedList<FileLock> getLocks() {
+        return locks;
+    }
+
+    public static class FileLock {
+        public String fileName;
+        public boolean isExclusive;
         public FileLock(String fileName, boolean isExclusive) {
             this.fileName = fileName;
             this.isExclusive = isExclusive;
+        }
+        @Override
+        public String toString() {
+            return "Archivo: " + fileName + " | Exclusivo: " + isExclusive;
         }
     }
 }

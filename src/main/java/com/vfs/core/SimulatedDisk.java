@@ -52,4 +52,12 @@ public class SimulatedDisk {
     public int getBlockSize() { return blockSize; }
     public int getTotalBlocks() { return blocks.length; }
     public boolean[] getFreeBlocksStatus() { return freeBlocks; }
+
+    public int getFreeBlockCount() {
+        int count = 0;
+        for (boolean isFree : freeBlocks) {
+            if (isFree) count++;
+        }
+        return count;
+    }
 }
