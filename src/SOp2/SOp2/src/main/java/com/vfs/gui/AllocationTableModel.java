@@ -6,7 +6,7 @@ import com.vfs.structures.CustomLinkedList;
 import javax.swing.table.AbstractTableModel;
 
 public class AllocationTableModel extends AbstractTableModel {
-    private String[] columnNames = {"Nombre", "Dueño", "Cant. Bloques", "Inicio", "Bloques"};
+    private String[] columnNames = {"Nombre", "Dueño", "Inicio", "Bloques"};
     private CustomLinkedList<VFile> files = new CustomLinkedList<>();
 
     public void setFiles(CustomLinkedList<VFile> files) {
