@@ -1,0 +1,75 @@
+
+/*
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
+ */
+package Modelo.EDD;
+
+import Modelo.EDD.Lista;
+
+/**
+ * Esto es solo para debuggear metodos de lista como buscar atribuyo minimo (para SRT)
+ * @author JGDV
+ */
+public class DebugObject {
+    public int ID;
+    public String Nombre;
+    
+    public DebugObject(int ID, String Nombre) {
+        this.ID = ID; // ID DE 4 DIGIYOS
+        this.Nombre=Nombre;
+    }
+/*
+En controladorMain
+SI FUNCIONA.    
+        DebugObject obj1=new DebugObject(500, "1");
+        DebugObject obj2=new DebugObject(5, "2");
+        DebugObject obj3=new DebugObject(10, "3");
+        DebugObject obj4=new DebugObject(2, "4");
+        DebugObject obj5=new DebugObject(7, "5");
+        DebugObject obj6=new DebugObject(30, "6");
+        
+        Lista<DebugObject> ListaObj=new Lista<DebugObject>();
+        ListaObj.addLast(obj1);
+        ListaObj.addLast(obj2);
+        ListaObj.addLast(obj3);
+        ListaObj.addLast(obj4);
+        ListaObj.addLast(obj5);
+        ListaObj.addLast(obj6);
+        
+        DebugObject hola=ListaObj.buscarPMinAtributo("ID");
+        
+        
+        System.out.println("ESTE ES EL MENOR ID DEL OBJETO "+hola.ID+" nombre:  "+hola.Nombre);
+    */
+
+    
+    
+    /*
+    PARA DEBUGGEAR LISTAS DE ESTADOS
+    
+    
+    for (int i = 0; i < this.colasPorEstado.BuscarPosicion(1).size(); i++) {
+                        Proceso readycolaproceso;
+                        readycolaproceso = this.colasPorEstado.BuscarPosicion(1).BuscarPosicion(i);
+                        if (readycolaproceso==null) {
+                            System.out.println("");    
+                            break;
+                        }else{
+                        readycolaproceso.debugPrint();
+                        }
+                    }
+                    for (int i = 0; i < this.colasPorEstado.BuscarPosicion(2).size(); i++) {
+                        Proceso runningcolaproceso;
+                        runningcolaproceso=this.colasPorEstado.BuscarPosicion(2).BuscarPosicion(i);
+                        if (runningcolaproceso==null) {
+                          System.out.println("NO HAY NADA AQUÍ");
+                          break;
+                        }else{
+                        runningcolaproceso.debugPrint();
+                        }
+                    }
+    
+    */
+
+}
