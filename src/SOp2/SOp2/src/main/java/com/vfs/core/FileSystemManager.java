@@ -6,9 +6,12 @@ import com.vfs.process.LockManager;
 import com.vfs.structures.CustomLinkedList;
 
 public class FileSystemManager {
-    private static FileSystemManager instance;
-    private SimulatedDisk disk;
-    private VDirectory root;
+    private static FileSystemManager instance; 
+    /*
+    se define con instance como si fuese la unica que puede esrar
+    */
+    private SimulatedDisk disk; //un nuevo disk simulado con los bloques
+    private VDirectory root; 
     private JournalManager journal;
     private String currentUser = "Admin";
     private boolean isAdmin = true;

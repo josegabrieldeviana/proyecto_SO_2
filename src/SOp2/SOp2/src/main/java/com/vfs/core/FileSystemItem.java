@@ -3,11 +3,11 @@ package com.vfs.core;
 import java.util.Date;
 
 public abstract class FileSystemItem {
-    protected String name;
-    protected String owner;
+    protected String name; //el nombre de file sys
+    protected String owner; //este es el nombre del dueño
     protected int permissions; // Representación simple (ej: 777, 755)
-    protected Date creationDate;
-    protected boolean isDirectory;
+    protected Date creationDate; //eñ tiempo de creación
+    protected boolean isDirectory; //para revisar si es directorio
 
     public FileSystemItem(String name, String owner, int permissions, boolean isDirectory) {
         this.name = name;
