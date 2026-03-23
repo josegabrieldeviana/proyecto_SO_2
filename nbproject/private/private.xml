@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/joseg/Desktop/Repositorio_de_github/proyecto_so_2_/src/main/java/com/vfs/journaling/Journal.java</file>
+            <file>file:/C:/Users/joseg/Desktop/Repositorio_de_github/proyecto_so_2_/src/main/java/com/vfs/journaling/JournalEntry.java</file>
+            <file>file:/C:/Users/joseg/Desktop/Repositorio_de_github/proyecto_so_2_/src/main/java/com/vfs/journaling/JournalManager.java</file>
+            <file>file:/C:/Users/joseg/Desktop/Repositorio_de_github/proyecto_so_2_/src/main/java/com/vfs/journaling/TransactionStatus.java</file>
+            <file>file:/C:/Users/joseg/Desktop/Repositorio_de_github/proyecto_so_2_/src/main/java/com/vfs/gui/AllocationTableModel.java</file>
+            <file>file:/C:/Users/joseg/Desktop/Repositorio_de_github/proyecto_so_2_/src/main/java/com/vfs/main/java/com/vfs/core/VDirectory.java</file>
+            <file>file:/C:/Users/joseg/Desktop/Repositorio_de_github/proyecto_so_2_/src/main/java/com/vfs/main/java/com/vfs/gui/MainFrame.java</file>
+            <file>file:/C:/Users/joseg/Desktop/Repositorio_de_github/proyecto_so_2_/src/main/java/com/vfs/scheduling/CSCANScheduler.java</file>
+            <file>file:/C:/Users/joseg/Desktop/Repositorio_de_github/proyecto_so_2_/src/main/java/com/vfs/scheduling/DiskScheduler.java</file>
+            <file>file:/C:/Users/joseg/Desktop/Repositorio_de_github/proyecto_so_2_/src/main/java/com/vfs/scheduling/FIFOScheduler.java</file>
+            <file>file:/C:/Users/joseg/Desktop/Repositorio_de_github/proyecto_so_2_/src/main/java/com/vfs/scheduling/IORequest.java</file>
+            <file>file:/C:/Users/joseg/Desktop/Repositorio_de_github/proyecto_so_2_/src/main/java/com/vfs/scheduling/SCANScheduler.java</file>
+            <file>file:/C:/Users/joseg/Desktop/Repositorio_de_github/proyecto_so_2_/src/main/java/com/vfs/structures/CustomLinkedList.java</file>
+        </group>
+    </open-files>
+</project-private>
